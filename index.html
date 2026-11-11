@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#111827">
+  <title>Poster Studio | AnkiyaYugam</title>
+  <link rel="stylesheet" href="Style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="Poster Studio home">
+      <span class="brand-mark">✦</span>
+      <span><strong>Poster Studio</strong><small>YOUR CREATIVE WORKSPACE</small></span>
+    </a>
+    <div class="top-actions">
+      <button class="btn btn-quiet" id="resetBtn" type="button">Reset design</button>
+      <button class="btn btn-primary" id="downloadBtn" type="button">Download poster ↓</button>
+    </div>
+  </header>
+
+  <main class="app-shell">
+    <aside class="sidebar">
+      <section class="panel">
+        <div class="section-heading"><span>01</span><h2>Poster content</h2></div>
+        <label>Occasion / category
+          <select id="occasion">
+            <option value="custom">Custom poster</option>
+            <option value="festival">Festival greeting</option>
+            <option value="birthday">Birthday greeting</option>
+            <option value="business">Business promotion</option>
+            <option value="education">Education / school</option>
+            <option value="announcement">Announcement</option>
+          </select>
+        </label>
+        <label>Main heading
+          <input id="headingInput" type="text" value="Happy Makar Sankranti!" maxlength="70">
+        </label>
+        <label>Subheading
+          <input id="subheadingInput" type="text" value="May your days soar high with happiness" maxlength="100">
+        </label>
+        <label>Additional message
+          <textarea id="messageInput" rows="3" maxlength="220">Wishing you and your family joy, prosperity and success.</textarea>
+        </label>
+        <div class="two-col">
+          <label>Heading colour <input id="headingColor" type="color" value="#ffffff"></label>
+          <label>Text colour <input id="textColor" type="color" value="#fff4dc"></label>
+        </div>
+        <label>Text alignment
+          <select id="textAlign"><option value="center">Center</option><option value="left">Left</option><option value="right">Right</option></select>
+        </label>
+      </section>
+
+      <section class="panel">
+        <div class="section-heading"><span>02</span><h2>Background & style</h2></div>
+        <div class="swatches" id="themeSwatches">
+          <button class="swatch active" data-theme="saffron" aria-label="Saffron theme"></button>
+          <button class="swatch" data-theme="midnight" aria-label="Midnight theme"></button>
+          <button class="swatch" data-theme="rose" aria-label="Rose theme"></button>
+          <button class="swatch" data-theme="emerald" aria-label="Emerald theme"></button>
+          <button class="swatch" data-theme="cream" aria-label="Cream theme"></button>
+        </div>
+        <label>Custom background colour <input id="backgroundColor" type="color" value="#d95b16"></label>
+        <label class="upload-control">Upload background image
+          <input id="backgroundUpload" type="file" accept="image/*">
+          <span class="upload-hint">Choose a photo or illustration from your device</span>
+        </label>
+        <button class="btn btn-outline full" id="removeBackgroundBtn" type="button">Remove uploaded background</button>
+        <label>Overlay strength <input id="overlayStrength" type="range" min="0" max="85" value="28"></label>
+      </section>
+
+      <section class="panel">
+        <div class="section-heading"><span>03</span><h2>Company branding</h2></div>
+        <label>Company name
+          <input id="companyInput" type="text" value="AnkiyaYugam" maxlength="50">
+        </label>
+        <label>Tagline
+          <input id="taglineInput" type="text" value="Creativity • Connection • Celebration" maxlength="90">
+        </label>
+        <label>Website / contact
+          <input id="contactInput" type="text" value="www.ankiyayugam.com" maxlength="80">
+        </label>
+        <label class="upload-control">Upload company logo
+          <input id="logoUpload" type="file" accept="image/*">
+          <span class="upload-hint">PNG with transparent background works best</span>
+        </label>
+        <label class="check-row"><input id="showBranding" type="checkbox" checked> Show branding on poster</label>
+      </section>
+
+      <section class="panel">
+        <div class="section-heading"><span>04</span><h2>Canvas size</h2></div>
+        <label>Poster format
+          <select id="formatSelect">
+            <option value="square">Instagram post · 1080 × 1080</option>
+            <option value="portrait">Instagram portrait · 1080 × 1350</option>
+            <option value="story">Story / status · 1080 × 1920</option>
+            <option value="landscape">Landscape · 1200 × 675</option>
+          </select>
+        </label>
+        <p class="small-note">Tip: Select any text on the poster to drag it into position.</p>
+      </section>
+    </aside>
+
+    <section class="workspace">
+      <div class="workspace-head">
+        <div><p class="eyebrow">LIVE PREVIEW</p><h1>Your poster canvas</h1></div>
+        <span class="status"><i></i> Changes update instantly</span>
+      </div>
+      <div class="canvas-wrap">
+        <div class="canvas-frame" id="canvasFrame">
+          <canvas id="posterCanvas" width="1080" height="1080" aria-label="Editable poster preview"></canvas>
+        </div>
+      </div>
+      <div class="canvas-footer">
+        <span id="dimensionLabel">1080 × 1080 px</span>
+        <span>PNG export · High resolution</span>
+      </div>
+      <div class="editor-hint"><strong>Quick tip</strong> Click and drag the heading, message or brand text directly on the poster. Use the controls on the left to customise your design.</div>
+    </section>
+
+    <aside class="rightbar">
+      <section class="panel">
+        <div class="section-heading"><span>✦</span><h2>Creative prompt</h2></div>
+        <p class="small-note">Describe the visual you want. This creates a design brief and updates the poster text; it does not generate an AI background image.</p>
+        <label>Describe the image you want
+          <textarea id="promptInput" rows="4" placeholder="Example: A premium Diwali background with glowing diyas, marigold flowers, elegant gold details and a rich navy backdrop. Leave clear space in the centre for greeting text..."></textarea>
+        </label>
+        <label>AI image quality
+          <select id="aiQuality"><option value="medium">Medium · quicker draft</option><option value="high" selected>High · recommended</option></select>
+        </label>
+        <button class="btn btn-primary full" id="generateAiBtn" type="button">✦ Generate AI background</button>
+        <p class="small-note" id="aiStatus" role="status" aria-live="polite">AI generation uses your securely configured server API key.</p>
+        <button class="btn btn-outline full" id="applyPromptBtn" type="button">Use prompt as poster text</button>
+      </section>
+      <section class="panel">
+        <div class="section-heading"><span>✎</span><h2>Selected element</h2></div>
+        <p class="small-note" id="selectionLabel">No element selected. Click a text element on the canvas.</p>
+        <label>Font size <input id="fontSize" type="range" min="22" max="110" value="68"></label>
+        <label>Font family
+          <select id="fontFamily">
+            <option value="Georgia">Georgia</option>
+            <option value="Arial">Arial</option>
+            <option value="Trebuchet MS">Trebuchet MS</option>
+            <option value="Verdana">Verdana</option>
+            <option value="Impact">Impact</option>
+          </select>
+        </label>
+        <button class="btn btn-outline full" id="centerElementBtn" type="button">Center selected element</button>
+      </section>
+      <section class="panel export-panel">
+        <div class="section-heading"><span>↓</span><h2>Export</h2></div>
+        <label>File type
+          <select id="exportFormat"><option value="image/png">PNG (best quality)</option><option value="image/jpeg">JPG (smaller file)</option></select>
+        </label>
+        <button class="btn btn-primary full" id="exportBtn" type="button">Download my poster</button>
+        <p class="small-note">Your designs stay in this browser. Download your poster to keep a copy.</p>
+      </section>
+    </aside>
+  </main>
+  <footer>Poster Studio <span>•</span> Designed for your brand</footer>
+  <script src="Script.js"></script>
+</body>
+</html>
